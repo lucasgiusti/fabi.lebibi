@@ -1,0 +1,43 @@
+﻿<div>
+    <form class="form-horizontal" data-ng-init="getProdutos()">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <legend>{{heading}}</legend>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <a class="btn btn-primary btn-large" href="produto/add">Novo</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%"></th>
+                            <th style="width: 1%"></th>
+                            <th style="width: 1%">Codigo</th>
+                            <th>Descrição</th>
+                            <th style="width: 1%">Quantidade</th>
+                            <th style="width: 20%">Valor Venda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="produto in produtos | inicioPaginacao: (currentPage-1)*itemPerPage | limitTo: itemPerPage">
+                            <td><a href="produto/{{produto.id}}/edit">Alterar</a></td>
+                            <td><a href="" ng-click="openModalDelete(produto)">Excluir</a></td>
+                            <td>{{produto.id}}</td>
+                            <td><a href="produto/{{produto.id}}">{{produto.descricao}}</a></td>
+                            <td>{{produto.quantidade}}</td>
+                            <td>{{produto.valorVenda}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <uib-pagination total-items="total" ng-show="(total > 0)" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-links="true" class="pagination-sm" force-ellipses="true"></uib-pagination>
+        </div>
+    </form>
+</div>
