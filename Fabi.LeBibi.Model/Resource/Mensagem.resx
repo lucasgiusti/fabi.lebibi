@@ -129,8 +129,23 @@
   <data name="Perfil_NomeTamanho" xml:space="preserve">
     <value>O tamanho do campo nome excedeu o limite</value>
   </data>
+  <data name="Produto_CodigoTamanho" xml:space="preserve">
+    <value>O tamanho do campo código excedeu o limite</value>
+  </data>
   <data name="Produto_DescricaoTamanho" xml:space="preserve">
     <value>O tamanho do campo descrição excedeu o limite</value>
+  </data>
+  <data name="Produto_EmailTamanho" xml:space="preserve">
+    <value>O tamanho do campo email excedeu o limite</value>
+  </data>
+  <data name="Produto_NomeTamanho" xml:space="preserve">
+    <value>O tamanho do campo nome excedeu o limite</value>
+  </data>
+  <data name="Produto_Telefone1Tamanho" xml:space="preserve">
+    <value>O tamanho do campo telefone 1 excedeu o limite</value>
+  </data>
+  <data name="Produto_Telefone2Tamanho" xml:space="preserve">
+    <value>O tamanho do campo telefone 2 excedeu o limite</value>
   </data>
   <data name="Usuario_EmailTamanho" xml:space="preserve">
     <value>O tamanho do campo email excedeu o limite</value>

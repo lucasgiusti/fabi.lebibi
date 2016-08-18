@@ -126,6 +126,21 @@
   <data name="Autenticacao_NecessarioAutenticacao" xml:space="preserve">
     <value>Necessário autenticação</value>
   </data>
+  <data name="Cliente_EmailInvalido" xml:space="preserve">
+    <value>Email inválido</value>
+  </data>
+  <data name="Cliente_ExcluiClienteOK" xml:space="preserve">
+    <value>Cliente excluído com sucesso</value>
+  </data>
+  <data name="Cliente_NaoEncontrado" xml:space="preserve">
+    <value>Cliente não encontrado</value>
+  </data>
+  <data name="Cliente_Nome" xml:space="preserve">
+    <value>O campo nome é obrigatório</value>
+  </data>
+  <data name="Cliente_SalvaClienteOK" xml:space="preserve">
+    <value>Cliente salvo com sucesso</value>
+  </data>
   <data name="Email_ErroEnvio" xml:space="preserve">
     <value>Erro ao enviar email id {0}. {1}</value>
   </data>

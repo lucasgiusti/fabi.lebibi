@@ -64,5 +64,17 @@ namespace Fabi.LeBibi.Model.Dominio
         public static readonly string FuncionalidadeNomeProdutoEdicao = "Produto Edição";
         public static readonly string FuncionalidadeNomeProdutoInclusao = "Produto Inclusão";
         public static readonly string FuncionalidadeNomeProdutoExclusao = "Produto Exclusão";
+
+        public static readonly string FuncionalidadeCliente = "23";
+        public static readonly string FuncionalidadeClienteConsulta = "24";
+        public static readonly string FuncionalidadeClienteEdicao = "25";
+        public static readonly string FuncionalidadeClienteInclusao = "26";
+        public static readonly string FuncionalidadeClienteExclusao = "27";
+
+        public static readonly string FuncionalidadeNomeCliente = "Cliente";
+        public static readonly string FuncionalidadeNomeClienteConsulta = "Cliente Consulta";
+        public static readonly string FuncionalidadeNomeClienteEdicao = "Cliente Edição";
+        public static readonly string FuncionalidadeNomeClienteInclusao = "Cliente Inclusão";
+        public static readonly string FuncionalidadeNomeClienteExclusao = "Cliente Exclusão";
     }
 }

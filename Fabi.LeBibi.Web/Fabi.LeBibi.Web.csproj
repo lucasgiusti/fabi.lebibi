@@ -116,6 +116,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\AlterarSenhaController.cs" />
+    <Compile Include="Controllers\Api\ClienteController.cs" />
     <Compile Include="Controllers\Api\EsqueciSenhaController.cs" />
     <Compile Include="Controllers\Api\FuncionalidadeController.cs" />
     <Compile Include="Controllers\Api\LogController.cs" />
@@ -132,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\clienteController.js" />
     <Content Include="app\controllers\alterarSenhaController.js" />
     <Content Include="app\controllers\esqueciSenhaController.js" />
     <Content Include="app\controllers\headerController.js" />
@@ -143,6 +145,10 @@
     <Content Include="app\controllers\produtoController.js" />
     <Content Include="app\controllers\signinController.js" />
     <Content Include="app\controllers\usuarioController.js" />
+    <Content Include="app\templates\cliente\cliente-add.html" />
+    <Content Include="app\templates\cliente\cliente-edit.html" />
+    <Content Include="app\templates\cliente\cliente-view.html" />
+    <Content Include="app\templates\cliente\clientes.html" />
     <Content Include="app\templates\paginaNaoEncontrada.html" />
     <Content Include="app\templates\produto\produto-add.html" />
     <Content Include="app\templates\produto\produto-edit.html" />

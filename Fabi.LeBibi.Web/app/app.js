@@ -20,6 +20,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngCook
         $routeProvider.when('/produto/:id/edit', { templateUrl: 'app/templates/produto/produto-edit.html', controller: 'produtoController' });
         $routeProvider.when('/produto/:id', { templateUrl: 'app/templates/produto/produto-view.html', controller: 'produtoController' });
 
+        $routeProvider.when('/cliente', { templateUrl: 'app/templates/cliente/clientes.html', controller: 'clienteController' });
+        $routeProvider.when('/cliente/add', { templateUrl: 'app/templates/cliente/cliente-add.html', controller: 'clienteController' });
+        $routeProvider.when('/cliente/:id/edit', { templateUrl: 'app/templates/cliente/cliente-edit.html', controller: 'clienteController' });
+        $routeProvider.when('/cliente/:id', { templateUrl: 'app/templates/cliente/cliente-view.html', controller: 'clienteController' });
+
         $routeProvider.otherwise({ redirectTo: '/paginanaoencontrada' });
         $locationProvider.html5Mode(true);
     });

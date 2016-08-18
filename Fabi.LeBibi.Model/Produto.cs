@@ -14,6 +14,16 @@ namespace Fabi.LeBibi.Model
 
         public int? Id { get; set; }
         public string Codigo { get; set; }
+        [SelfValidation]
+        private void ValidaCodigo(Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResults results)
+        {
+            if (Codigo != null && Codigo.Length > 50)
+            {
+                Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResult result =
+                      new Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResult(Resource.Mensagem.Produto_CodigoTamanho, this, "Codigo", null, null);
+                results.AddResult(result);
+            }
+        }
         public string Descricao { get; set; }
         [SelfValidation]
         private void ValidaDescricao(Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResults results)

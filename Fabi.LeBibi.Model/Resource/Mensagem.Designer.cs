@@ -97,11 +97,56 @@ namespace Fabi.LeBibi.Model.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O tamanho do campo código excedeu o limite.
+        /// </summary>
+        internal static string Produto_CodigoTamanho {
+            get {
+                return ResourceManager.GetString("Produto_CodigoTamanho", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O tamanho do campo descrição excedeu o limite.
         /// </summary>
         internal static string Produto_DescricaoTamanho {
             get {
                 return ResourceManager.GetString("Produto_DescricaoTamanho", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O tamanho do campo email excedeu o limite.
+        /// </summary>
+        internal static string Produto_EmailTamanho {
+            get {
+                return ResourceManager.GetString("Produto_EmailTamanho", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O tamanho do campo nome excedeu o limite.
+        /// </summary>
+        internal static string Produto_NomeTamanho {
+            get {
+                return ResourceManager.GetString("Produto_NomeTamanho", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O tamanho do campo telefone 1 excedeu o limite.
+        /// </summary>
+        internal static string Produto_Telefone1Tamanho {
+            get {
+                return ResourceManager.GetString("Produto_Telefone1Tamanho", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O tamanho do campo telefone 2 excedeu o limite.
+        /// </summary>
+        internal static string Produto_Telefone2Tamanho {
+            get {
+                return ResourceManager.GetString("Produto_Telefone2Tamanho", resourceCulture);
             }
         }
         

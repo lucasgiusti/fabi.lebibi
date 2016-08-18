@@ -1,10 +1,50 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-
-</body>
-</html>
+﻿<div>
+    <form class="form-horizontal" data-ng-init="getProduto()">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <legend>{{heading}}</legend>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Código</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" placeholder="Código" ng-model="produto.codigo" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Descrição</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" placeholder="Descrição" ng-model="produto.descricao" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Quantidade</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control integer" placeholder="Quantidade" ng-model="produto.quantidade" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Valor Compra</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control money valorCompra" placeholder="Valor Compra" ng-model="produto.valorCompra" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Margem Lucro</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control percent margemLucro" placeholder="Margem Lucro" ng-model="produto.margemLucro" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Valor Venda</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control money valorVenda" placeholder="Valor Venda" ng-model="produto.valorVenda" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a href="produto" class="btn btn-warning">Voltar</a>
+            </div>
+        </div>
+    </form>
+</div>

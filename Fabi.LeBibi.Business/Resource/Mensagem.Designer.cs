@@ -88,6 +88,51 @@ namespace Fabi.LeBibi.Business.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email inválido.
+        /// </summary>
+        internal static string Cliente_EmailInvalido {
+            get {
+                return ResourceManager.GetString("Cliente_EmailInvalido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cliente excluído com sucesso.
+        /// </summary>
+        internal static string Cliente_ExcluiClienteOK {
+            get {
+                return ResourceManager.GetString("Cliente_ExcluiClienteOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cliente não encontrado.
+        /// </summary>
+        internal static string Cliente_NaoEncontrado {
+            get {
+                return ResourceManager.GetString("Cliente_NaoEncontrado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O campo nome é obrigatório.
+        /// </summary>
+        internal static string Cliente_Nome {
+            get {
+                return ResourceManager.GetString("Cliente_Nome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cliente salvo com sucesso.
+        /// </summary>
+        internal static string Cliente_SalvaClienteOK {
+            get {
+                return ResourceManager.GetString("Cliente_SalvaClienteOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro ao enviar email id {0}. {1}.
         /// </summary>
         internal static string Email_ErroEnvio {

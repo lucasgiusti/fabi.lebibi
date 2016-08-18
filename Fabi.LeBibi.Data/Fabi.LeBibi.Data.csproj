@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteData.cs" />
+    <Compile Include="Configuration\ClienteConfiguration.cs" />
     <Compile Include="Configuration\EmailConfiguration.cs" />
     <Compile Include="Configuration\PerfilUsuarioConfiguration.cs" />
     <Compile Include="Configuration\ProdutoConfiguration.cs" />

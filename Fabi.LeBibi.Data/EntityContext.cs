@@ -25,6 +25,7 @@ namespace Fabi.LeBibi.Data
         public DbSet<PerfilFuncionalidade> PerfilFuncionalidades { get; set; }
         public DbSet<PerfilUsuario> PerfilUsuarios { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,6 +38,7 @@ namespace Fabi.LeBibi.Data
             modelBuilder.Configurations.Add(new PerfilFuncionalidadeConfiguration());
             modelBuilder.Configurations.Add(new PerfilUsuarioConfiguration());
             modelBuilder.Configurations.Add(new ProdutoConfiguration());
+            modelBuilder.Configurations.Add(new ClienteConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
