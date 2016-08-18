@@ -15,6 +15,12 @@
 
         $http.get(url, headerAuth).success(function (data) {
             $scope.produtos = data;
+
+            angular.forEach($scope.produtos, function (produto, key) {
+                produto.valorVenda = produto.valorVenda.toFixed(2);
+            });
+            
+
             $scope.total = $scope.produtos.length;
         }).error(function (jqxhr, textStatus) {
             toasterAlert.showAlert(jqxhr.message);
@@ -28,22 +34,14 @@
 
         $http.get(url + '/' + $scope.id, headerAuth).success(function (data) {
             $scope.produto = data;
+            $scope.produto.valorCompra = $scope.produto.valorCompra.toFixed(2);
+            $scope.produto.valorVenda = $scope.produto.valorVenda.toFixed(2);
         }).error(function (jqxhr, textStatus) {
             toasterAlert.showAlert(jqxhr.message);
         });
     };
 
     $scope.postProduto = function () {
-
-        if ($scope.produto.valorCompra)
-            $scope.produto.valorCompra = $scope.produto.valorCompra * 10;
-
-        if ($scope.produto.margemLucro)
-            $scope.produto.margemLucro = $scope.produto.margemLucro * 10;
-
-        if ($scope.produto.valorVenda)
-            $scope.produto.valorVenda = $scope.produto.valorVenda * 10;
-        
 
         $http.post(url, JSON.stringify($scope.produto), headerAuth).success(function (id) {
             $scope.id = id;
@@ -57,6 +55,8 @@
     $scope.putProduto = function () {
         $http.put(url + '/' + $scope.id, JSON.stringify($scope.produto), headerAuth).success(function (data) {
             $scope.produto = data;
+            $scope.produto.valorCompra = $scope.produto.valorCompra.toFixed(2);
+            $scope.produto.valorVenda = $scope.produto.valorVenda.toFixed(2);
             toasterAlert.showAlert(mensagemSalvo);
         }).error(function (jqxhr, textStatus) {
             toasterAlert.showAlert(jqxhr.message);
@@ -112,14 +112,12 @@
                 }
                 else {
                     valor = findAndReplace(valor, ',', '');
-                    var margemLucro = $scope.produto.margemLucro.replace('%','');
-                    $scope.produto.valorVenda = (((valor / 100) * margemLucro) + valor * 1).toFixed(2);
+                    $scope.produto.valorVenda = (((valor / 100) * $scope.produto.margemLucro) + valor * 1).toFixed(2);
                     $scope.produto.valorVenda = $('.valorVenda').masked($scope.produto.valorVenda);
                 }
             }
             if ($(currentField).attr('class').indexOf('margemLucro') > -1) {
                 if ($scope.produto.valorCompra && $scope.produto.valorCompra != '') {
-                    valor = valor.replace('%','');
                     var valorCompra = findAndReplace($scope.produto.valorCompra, ',', '');
                     $scope.produto.valorVenda = (((valorCompra / 100) * valor) + valorCompra * 1).toFixed(2);
                     $scope.produto.valorVenda = $('.valorVenda').masked($scope.produto.valorVenda);
@@ -142,9 +140,4 @@
     $scope.pageChanged = function () {
         $scope.start = ($scope.currentPage - 1) * $scope.itemPerPage;
     };
-});
-
-
-$(document).ready(function () {
-    
 });

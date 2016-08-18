@@ -19,18 +19,18 @@
                             <th style="width: 1%"></th>
                             <th style="width: 1%">Codigo</th>
                             <th>Descrição</th>
-                            <th style="width: 1%">Quantidade</th>
-                            <th style="width: 20%">Valor Venda</th>
+                            <th style="width: 1%; text-align: right">Quantidade</th>
+                            <th style="width: 20%; text-align: right">Valor Venda</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="produto in produtos | inicioPaginacao: (currentPage-1)*itemPerPage | limitTo: itemPerPage">
                             <td><a href="produto/{{produto.id}}/edit">Alterar</a></td>
                             <td><a href="" ng-click="openModalDelete(produto)">Excluir</a></td>
-                            <td>{{produto.id}}</td>
+                            <td>{{produto.codigo}}</td>
                             <td><a href="produto/{{produto.id}}">{{produto.descricao}}</a></td>
-                            <td>{{produto.quantidade}}</td>
-                            <td>{{produto.valorVenda}}</td>
+                            <td style="text-align: right">{{produto.quantidade}}</td>
+                            <td style="text-align: right">{{produto.valorVenda}}</td>
                         </tr>
                     </tbody>
                 </table>
