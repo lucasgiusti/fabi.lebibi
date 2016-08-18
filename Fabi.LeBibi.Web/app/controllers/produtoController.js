@@ -98,6 +98,41 @@
         });
     };
 
+    $scope.verificaValorCompraVazio = function () {
+        if (!$scope.produto.valorCompra || ($scope.produto.valorCompra && $scope.produto.valorCompra == '')) {
+            $scope.produto.valorVenda = $scope.produto.valorCompra;
+        }
+    };
+
+    var options = {
+        onChange: function (valor, event, currentField, options) {
+            if ($(currentField).attr('class').indexOf('valorCompra') > -1) {
+                if (!$scope.produto.margemLucro || $scope.produto.margemLucro == '') {
+                    $scope.produto.valorVenda = valor;
+                }
+                else {
+                    valor = findAndReplace(valor, ',', '');
+                    var margemLucro = $scope.produto.margemLucro.replace('%','');
+                    $scope.produto.valorVenda = (((valor / 100) * margemLucro) + valor * 1).toFixed(2);
+                    $scope.produto.valorVenda = $('.valorVenda').masked($scope.produto.valorVenda);
+                }
+            }
+            if ($(currentField).attr('class').indexOf('margemLucro') > -1) {
+                if ($scope.produto.valorCompra && $scope.produto.valorCompra != '') {
+                    valor = valor.replace('%','');
+                    var valorCompra = findAndReplace($scope.produto.valorCompra, ',', '');
+                    $scope.produto.valorVenda = (((valorCompra / 100) * valor) + valorCompra * 1).toFixed(2);
+                    $scope.produto.valorVenda = $('.valorVenda').masked($scope.produto.valorVenda);
+                }
+            }
+        },
+        reverse: true
+    };
+
+    $('.money').mask('#,##0.00', options);
+    $('.integer').mask('###0', { reverse: true });
+    $('.percent').mask('###0', options);
+
     //PAGINATION
     $scope.total = 0;
     $scope.currentPage = 1;
@@ -107,4 +142,9 @@
     $scope.pageChanged = function () {
         $scope.start = ($scope.currentPage - 1) * $scope.itemPerPage;
     };
+});
+
+
+$(document).ready(function () {
+    
 });

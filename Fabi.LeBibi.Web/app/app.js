@@ -72,11 +72,6 @@ app.factory('UserService', function ($http, $window, $cookies, $location, toaste
     };
 });
 
-$(document).ready(function () {
-    $('.integer').mask('###0', { reverse: true });
-    $('.money').mask('#,##0.00', { reverse: true });
-});
-
 function findAndReplace(string, target, replacement) {
     var i = 0, length = string.length;
 
