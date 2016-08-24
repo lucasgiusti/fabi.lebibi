@@ -64,6 +64,7 @@
     <Compile Include="Results\ServiceResultMessage.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioLogado.cs" />
+    <Compile Include="Venda.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\Mensagem.resx">

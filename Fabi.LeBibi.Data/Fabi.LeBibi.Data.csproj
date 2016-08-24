@@ -55,6 +55,7 @@
     <Compile Include="Configuration\EmailConfiguration.cs" />
     <Compile Include="Configuration\PerfilUsuarioConfiguration.cs" />
     <Compile Include="Configuration\ProdutoConfiguration.cs" />
+    <Compile Include="Configuration\VendaConfiguration.cs" />
     <Compile Include="EmailData.cs" />
     <Compile Include="LogData.cs" />
     <Compile Include="PerfilData.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Library\DataBase.cs" />
     <Compile Include="UsuarioData.cs" />
+    <Compile Include="VendaData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fabi.LeBibi.Model\Fabi.LeBibi.Model.csproj">

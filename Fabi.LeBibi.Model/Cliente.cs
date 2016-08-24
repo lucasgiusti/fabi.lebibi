@@ -59,5 +59,6 @@ namespace Fabi.LeBibi.Model
         }
         public DateTime? DataInclusao { get; set; }
         public DateTime? DataAlteracao { get; set; }
+        public IList<Venda> Vendas { get; set; }
     }
 }

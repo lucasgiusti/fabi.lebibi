@@ -121,6 +121,7 @@
     <Compile Include="Controllers\Api\FuncionalidadeController.cs" />
     <Compile Include="Controllers\Api\LogController.cs" />
     <Compile Include="Controllers\Api\ProdutoController.cs" />
+    <Compile Include="Controllers\Api\VendaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\UsuarioController.cs" />
     <Compile Include="Controllers\Api\PerfilController.cs" />
@@ -145,6 +146,7 @@
     <Content Include="app\controllers\produtoController.js" />
     <Content Include="app\controllers\signinController.js" />
     <Content Include="app\controllers\usuarioController.js" />
+    <Content Include="app\controllers\vendaController.js" />
     <Content Include="app\templates\cliente\cliente-add.html" />
     <Content Include="app\templates\cliente\cliente-edit.html" />
     <Content Include="app\templates\cliente\cliente-view.html" />
@@ -166,6 +168,7 @@
     <Content Include="app\templates\usuario\usuario-add.html" />
     <Content Include="app\templates\usuario\usuario-edit.html" />
     <Content Include="app\templates\usuario\usuario-view.html" />
+    <Content Include="app\templates\venda\venda-add.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

@@ -12,6 +12,7 @@
 /// <reference path="../app/controllers/produtocontroller.js" />
 /// <reference path="../app/controllers/signincontroller.js" />
 /// <reference path="../app/controllers/usuariocontroller.js" />
+/// <reference path="../app/controllers/vendacontroller.js" />
 /// <reference path="../app/library/angular-util.js" />
 /// <reference path="angular.min.js" />
 /// <reference path="angular-animate.min.js" />

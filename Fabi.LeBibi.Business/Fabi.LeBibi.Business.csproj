@@ -66,6 +66,7 @@
       <DependentUpon>Mensagem.resx</DependentUpon>
     </Compile>
     <Compile Include="UsuarioBusiness.cs" />
+    <Compile Include="VendaBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fabi.LeBibi.Data\Fabi.LeBibi.Data.csproj">

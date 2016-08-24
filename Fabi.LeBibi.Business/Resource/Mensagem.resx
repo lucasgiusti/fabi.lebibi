@@ -279,4 +279,19 @@
   <data name="Usuario_SenhaInvalida" xml:space="preserve">
     <value>Senha inválida</value>
   </data>
+  <data name="Venda_ExcluiVendaOK" xml:space="preserve">
+    <value>Venda excluída com sucesso</value>
+  </data>
+  <data name="Venda_NaoEncontrada" xml:space="preserve">
+    <value>Venda não encontrada</value>
+  </data>
+  <data name="Venda_SalvaVendaOK" xml:space="preserve">
+    <value>Venda salva com sucesso</value>
+  </data>
+  <data name="Venda_ValorFinal" xml:space="preserve">
+    <value>O campo valor final é obrigatório</value>
+  </data>
+  <data name="Venda_ValorTotal" xml:space="preserve">
+    <value>O campo valor total é obrigatório</value>
+  </data>
 </root>

@@ -1,0 +1,149 @@
+﻿<div>
+    <form class="form-horizontal" data-ng-init="addVenda()">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <legend>{{heading}}</legend>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <uib-tabset>
+                    <uib-tab index="0" heading="Cliente">
+                        <div class="form-group"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Id</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" placeholder="Id" ng-model="cliente.id" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nome</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Nome" ng-model="cliente.nome" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Email" ng-model="cliente.email" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Telefone 1</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control telefone" placeholder="Telefone" ng-model="cliente.telefone1" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Telefone 2</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control telefone" placeholder="Telefone" ng-model="cliente.telefone2" disabled>
+                                </div>
+                            </div>
+</uib-tab>
+                    <uib-tab index="1" heading="Produtos">
+                        <div class="form-group"></div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <button type="button" class="btn btn-primary btn-large" ng-click="openModalProdutosDisponiveis()">Novo</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 1%"></th>
+                                            <th style="width: 1%"></th>
+                                            <th style="width: 1%">Codigo</th>
+                                            <th>Descrição</th>
+                                            <th style="width: 1%; text-align: right">Quantidade</th>
+                                            <th style="width: 20%; text-align: right">Valor Venda</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="vendaProduto in venda.vendaProduto">
+                                            <td>{{vendaProduto.produto.codigo}}</td>
+                                            <td><a href="produto/{{produto.id}}">{{vendaProduto.produto.descricao}}</a></td>
+                                            <td style="text-align: right">{{vendaProduto.quantidade}}</td>
+                                            <td style="text-align: right">{{vendaProduto.valorVenda}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Pagamento">
+                        <div class="form-group"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Telefone 2</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control telefone" placeholder="Telefone" ng-model="cliente.telefone2" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="cliente" class="btn btn-warning">Voltar</a>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="3" heading="Total">
+                        <div class="form-group"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Telefone 2</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control telefone" placeholder="Telefone" ng-model="cliente.telefone2" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="cliente" class="btn btn-warning">Voltar</a>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/ng-template" id="produtosDisponiveisContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Produtos Disponíveis</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 1%">Codigo</th>
+                        <th>Descrição</th>
+                        <th style="width: 1%; text-align: right">Disponíveis</th>
+                        <th style="width: 1%; text-align: right">Quantidade</th>
+                        <th style="width: 10%"></th>
+                        <th style="width: 20%; text-align: right">Valor Venda</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="produto in produtos | inicioPaginacao: (currentPage-1)*itemPerPage | limitTo: itemPerPage">
+                        <td>{{produto.codigo}}</td>
+                        <td>{{produto.descricao}}</td>
+                        <td style="text-align: right">{{produto.quantidade}}</td>
+                        <td style="text-align: right">{{produto.quantidadeSelecionada}}</td>
+                        <td>
+                            <button class="btn btn-primary" type="button" ng-click="addProdutoSelecionado(produto)">+</button>
+                            <button class="btn btn-warning" type="button" ng-click="delProdutoSelecionado(produto)">-</button>
+                        </td>
+                        <td style="text-align: right">{{produto.valorVenda}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align: center">
+            <uib-pagination total-items="total" ng-show="(total > 0)" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-links="true" class="pagination-sm" force-ellipses="true"></uib-pagination>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="confirmar()">Confirmar</button>
+            <button class="btn btn-warning" type="button" ng-click="cancelar()">Cancelar</button>
+        </div>
+    </script>
+</div>

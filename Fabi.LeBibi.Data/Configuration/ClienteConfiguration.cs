@@ -21,6 +21,8 @@ namespace Fabi.LeBibi.Data.Configuration
             this.Property(i => i.Telefone2).HasColumnName("Telefone2");
             this.Property(i => i.DataInclusao).HasColumnName("DataInclusao");
             this.Property(i => i.DataAlteracao).HasColumnName("DataAlteracao");
+
+            this.HasMany(i => i.Vendas).WithRequired().HasForeignKey(d => d.ClienteId);
         }
     }
 }

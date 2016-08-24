@@ -545,5 +545,50 @@ namespace Fabi.LeBibi.Business.Resource {
                 return ResourceManager.GetString("Usuario_SenhaInvalida", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Venda excluída com sucesso.
+        /// </summary>
+        internal static string Venda_ExcluiVendaOK {
+            get {
+                return ResourceManager.GetString("Venda_ExcluiVendaOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Venda não encontrada.
+        /// </summary>
+        internal static string Venda_NaoEncontrada {
+            get {
+                return ResourceManager.GetString("Venda_NaoEncontrada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Venda salva com sucesso.
+        /// </summary>
+        internal static string Venda_SalvaVendaOK {
+            get {
+                return ResourceManager.GetString("Venda_SalvaVendaOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O campo valor final é obrigatório.
+        /// </summary>
+        internal static string Venda_ValorFinal {
+            get {
+                return ResourceManager.GetString("Venda_ValorFinal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O campo valor total é obrigatório.
+        /// </summary>
+        internal static string Venda_ValorTotal {
+            get {
+                return ResourceManager.GetString("Venda_ValorTotal", resourceCulture);
+            }
+        }
     }
 }
