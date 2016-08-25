@@ -41,12 +41,17 @@
                                     <input type="text" class="form-control telefone" placeholder="Telefone" ng-model="cliente.telefone2" disabled>
                                 </div>
                             </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="cliente/{{cliente.id}}" class="btn btn-warning">Voltar</a>
+                            </div>
+                        </div>
 </uib-tab>
                     <uib-tab index="1" heading="Produtos">
                         <div class="form-group"></div>
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-10">
-                                <button type="button" class="btn btn-primary btn-large" ng-click="openModalProdutosDisponiveis()">Novo</button>
+                                <button type="button" class="btn btn-primary btn-large" ng-click="openModalProdutosDisponiveis()">Incluir Produto</button>
                             </div>
                         </div>
                         <div class="form-group">
@@ -55,36 +60,67 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 1%"></th>
-                                            <th style="width: 1%"></th>
                                             <th style="width: 1%">Codigo</th>
                                             <th>Descrição</th>
                                             <th style="width: 1%; text-align: right">Quantidade</th>
+                                            <th style="width: 10%"></th>
                                             <th style="width: 20%; text-align: right">Valor Venda</th>
+                                            <th style="width: 20%; text-align: right">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="vendaProduto in venda.vendaProduto">
+                                            <td><a href="" ng-click="delProdutoSelecionadoVenda(vendaProduto)">Excluir</a></td>
                                             <td>{{vendaProduto.produto.codigo}}</td>
-                                            <td><a href="produto/{{produto.id}}">{{vendaProduto.produto.descricao}}</a></td>
+                                            <td>{{vendaProduto.produto.descricao}}</td>
                                             <td style="text-align: right">{{vendaProduto.quantidade}}</td>
+                                            <td>
+                                                <button class="btn btn-primary" type="button" ng-click="addProdutoSelecionado(vendaProduto)">+</button>
+                                                <button class="btn btn-warning" type="button" ng-click="delProdutoSelecionado(vendaProduto)">-</button>
+                                            </td>
                                             <td style="text-align: right">{{vendaProduto.valorVenda}}</td>
+                                            <td style="text-align: right">{{calculaValorVendaTotal(vendaProduto.quantidade, vendaProduto.valorVenda)}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: right">
+                                <h4><strong>{{calculaTotalProdutos()}}</strong></h4>
                             </div>
                         </div>
                     </uib-tab>
                     <uib-tab index="2" heading="Pagamento">
                         <div class="form-group"></div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Telefone 2</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control telefone" placeholder="Telefone" ng-model="cliente.telefone2" disabled>
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <button type="button" class="btn btn-primary btn-large" ng-click="openModalParcelasForm()">Incluir Parcela</button>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <a href="cliente" class="btn btn-warning">Voltar</a>
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 1%"></th>
+                                            <th style="width: 1%">Tipo</th>
+                                            <th style="width: 1%">Data</th>
+                                            <th style="width: 20%; text-align: right">Valor</th>
+                                            <th style="width: 1%">Feito</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="vendaParcela in venda.vendaParcela">
+                                            <td><a href="" ng-click="delParcela(vendaParcela)">Excluir</a></td>
+                                            <td>{{vendaParcela.tipoPagamento}}</td>
+                                            <td>{{vendaParcela.dataPagamento}}</td>
+                                            <td style="text-align: right">{{vendaParcela.valor}}</td>
+                                            <td>{{vendaParcela.Feito}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: right">
+                                <h4><strong>{{calculaTotalParcelas()}}</strong></h4>
                             </div>
                         </div>
                     </uib-tab>
@@ -146,4 +182,49 @@
             <button class="btn btn-warning" type="button" ng-click="cancelar()">Cancelar</button>
         </div>
     </script>
+    <script type="text/ng-template" id="parcelasFormContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Nova Parcela</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <form class="form-horizontal" data-ng-init="addVenda()">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Quantidade</label>
+                    <div class="col-sm-5">
+                        <label style="margin-right: 10px">{{parcelaForm.quantidade}}</label>
+                        <button class="btn btn-primary" type="button" ng-click="addParcelaQuantidade()">+</button>
+                        <button class="btn btn-warning" type="button" ng-click="delParcelaQuantidade()">-</button>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Tipo</label>
+                        <div class="col-sm-5">
+                             <select class="form-control" ng-model="tiposPagamento.selected" ng-options="o as o for o in tiposPagamento.options"></select>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Valor</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control money" placeholder="Valor" ng-model="parcelaForm.valor">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Data</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control date" placeholder="Data" ng-model="parcelaForm.dataPagamento">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Feito</label>
+                    <div class="col-sm-5">
+                        <input type="checkbox" ng-model="parcelaForm.feito">
+                    </div>
+                </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="confirmar()">Confirmar</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancelar()">Cancelar</button>
+                </div>
+</script>
 </div>
