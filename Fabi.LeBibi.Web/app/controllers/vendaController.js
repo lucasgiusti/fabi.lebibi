@@ -9,6 +9,7 @@
     $scope.venda = null;
     $scope.cliente = null;
     $scope.produtos = [];
+    $scope.totalPago = 0;
 
     //APIs
     $scope.getProdutos = function () {
@@ -80,6 +81,10 @@
         });
     };
 
+    $scope.naoTemProdutos = function () {
+        return $scope.venda.vendaProduto.length == 0;
+    };
+
     $scope.openModalParcelasForm = function () {
         var modalInstance = $uibModal.open({
             animation: true,
@@ -87,16 +92,26 @@
             controller: 'modalParcelasFormInstanceController',
             controllerAs: this,
             resolve: {
-                dadosModalParcelasForm: function () {
-                    return null;
-                }
+                dadosModalParcelasForm: { totalAPagar: $scope.totalAPagar(), restanteAPagar: $scope.restanteAPagar()}
             }
         });
 
         modalInstance.result.then(function (parcelaForm) {
+            var totalPagando = 0;
+            var ultimaDataPagamento = null;
             for (var i = 0; i < parcelaForm.quantidade; i++) {
-                $scope.venda.vendaParcela.push({ tipoPagamento: parcelaForm.tipoPagamento, valor: parcelaForm.valor, dataPagamento: parcelaForm.dataPagamento, feito: parcelaForm.feito });
+                
+                if (i == 0) {
+                    ultimaDataPagamento = angular.copy(parcelaForm.dataPagamento);
+                }
+                else {
+                    ultimaDataPagamento.setMonth(ultimaDataPagamento.getMonth() + 1);
+                }
+
+                totalPagando = (parseFloat(parcelaForm.valor) + parseFloat(totalPagando)).toFixed(2);
+                $scope.venda.vendaParcela.push({ tipoPagamento: parcelaForm.tipoPagamento, valor: parcelaForm.valor, dataPagamento: angular.copy(ultimaDataPagamento), feito: parcelaForm.feito });
             }
+            $scope.totalPago = parseFloat($scope.totalPago) + parseFloat(totalPagando);
         });
     };
 
@@ -127,6 +142,7 @@
     };
 
     $scope.delParcela = function (vendaParcela) {
+        $scope.totalPago = (parseFloat($scope.totalPago) - parseFloat(vendaParcela.valor)).toFixed(2);
         $scope.venda.vendaParcela.splice($scope.venda.vendaParcela.indexOf(vendaParcela), 1);
     };
 
@@ -134,17 +150,22 @@
         return parseFloat(quantidade * valorVenda).toFixed(2);
     };
 
-    $scope.calculaTotalProdutos = function () {
+    $scope.totalAPagar = function () {
         var total = 0;
         angular.forEach($scope.venda.vendaProduto, function (vendaProduto, key) {
             total = (parseFloat(total) + parseFloat($scope.calculaValorVendaTotal(vendaProduto.quantidade, vendaProduto.valorVenda))).toFixed(2);
         });
-        if (total == 0) {
-            return null;
+        return total;
+    };
+
+    $scope.restanteAPagar = function () {
+        if ($scope.totalPago == 0) {
+            return $scope.totalAPagar();
         }
         else {
-            return total;
+            return ($scope.totalAPagar() - $scope.totalPago).toFixed(2);
         }
+
     };
 });
 
@@ -210,7 +231,9 @@ app.controller('modalProdutosDisponiveisInstanceController', function ($scope, $
 
 app.controller('modalParcelasFormInstanceController', function ($scope, $uibModalInstance, dadosModalParcelasForm) {
     $scope.tiposPagamento = { options: ['Dinheiro', 'Cheque', 'Depósito'], selected: 'Dinheiro' };
-    $scope.parcelaForm = { quantidade: 1, tipoPagamento: $scope.tiposPagamento.selected, dataPagamento: null, valor: null };
+    $scope.totalAPagar = parseFloat(dadosModalParcelasForm.totalAPagar).toFixed(2);
+    $scope.restanteAPagar = parseFloat(dadosModalParcelasForm.restanteAPagar).toFixed(2);
+    $scope.parcelaForm = { quantidade: 1, tipoPagamento: $scope.tiposPagamento.selected, dataPagamento: new Date(), valor: $scope.restanteAPagar };
 
     $scope.confirmar = function () {
         if ((!$scope.parcelaForm.valor ||
@@ -222,10 +245,10 @@ app.controller('modalParcelasFormInstanceController', function ($scope, $uibModa
             ($scope.parcelaForm.dataPagamento && $scope.parcelaForm.dataPagamento == null) ||
             ($scope.parcelaForm.dataPagamento && $scope.parcelaForm.dataPagamento == null) ||
             ($scope.parcelaForm.dataPagamento && $scope.parcelaForm.dataPagamento.length < 10))
-
             ) {
             return false;
         }
+        $scope.parcelaForm.valor = $('.money').masked($scope.parcelaForm.valor);
         $uibModalInstance.close($scope.parcelaForm);
     };
 
@@ -235,13 +258,24 @@ app.controller('modalParcelasFormInstanceController', function ($scope, $uibModa
 
     $scope.addParcelaQuantidade = function () {
         $scope.parcelaForm.quantidade++;
+        $scope.parcelaForm.valor = ($scope.restanteAPagar / $scope.parcelaForm.quantidade).toFixed(2);
     };
     $scope.delParcelaQuantidade = function () {
         if ($scope.parcelaForm.quantidade > 1) {
             $scope.parcelaForm.quantidade--;
+            $scope.parcelaForm.valor = ($scope.restanteAPagar / $scope.parcelaForm.quantidade).toFixed(2);
         }
     };
 
-    $('.money').mask('#,##0.00', { reverse: true });
-    $('.date').mask('00/00/0000');
+    $('.money').mask('#0.00', { reverse: true });
+    
+
+    //DatePicker
+    $scope.openDatePicker = function () {
+        $scope.popupDatePicker.opened = true;
+    };
+
+    $scope.popupDatePicker = {
+        opened: false
+    };
 });

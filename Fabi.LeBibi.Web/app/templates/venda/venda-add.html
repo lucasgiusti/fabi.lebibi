@@ -81,11 +81,17 @@
                                             <td style="text-align: right">{{vendaProduto.valorVenda}}</td>
                                             <td style="text-align: right">{{calculaValorVendaTotal(vendaProduto.quantidade, vendaProduto.valorVenda)}}</td>
                                         </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align: right"><strong ng-show="totalAPagar() > 0">{{totalAPagar()}}</strong></td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="col-sm-offset-1 col-sm-10" style="text-align: right">
-                                <h4><strong>{{calculaTotalProdutos()}}</strong></h4>
                             </div>
                         </div>
                     </uib-tab>
@@ -102,25 +108,32 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 1%"></th>
-                                            <th style="width: 1%">Tipo</th>
+                                            <th>Tipo</th>
                                             <th style="width: 1%">Data</th>
-                                            <th style="width: 20%; text-align: right">Valor</th>
                                             <th style="width: 1%">Feito</th>
+                                            <th style="width: 1%; text-align: right">Valor</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="vendaParcela in venda.vendaParcela">
                                             <td><a href="" ng-click="delParcela(vendaParcela)">Excluir</a></td>
                                             <td>{{vendaParcela.tipoPagamento}}</td>
-                                            <td>{{vendaParcela.dataPagamento}}</td>
+                                            <td>{{vendaParcela.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+                                            <td><input type="checkbox" ng-model="vendaParcela.feito"></td>
                                             <td style="text-align: right">{{vendaParcela.valor}}</td>
-                                            <td>{{vendaParcela.Feito}}</td>
+                                        </tr>
+                                        <tr ng-show="venda.vendaParcela.length > 0">
+                                            <td></td>
+                                            <td></td>
+                                            <td ng-show="restanteAPagar() > 0" style="color: red">Falta pagar</td>
+                                            <td ng-show="restanteAPagar() == 0">Falta pagar</td>
+                                            <td ng-show="restanteAPagar() < 0" style="color: blue">Sobrando</td>
+                                            <td></td>
+                                            <td ng-show="restanteAPagar() >= 0" style="text-align: right; color: red"> <strong ng-show="restanteAPagar() > 0">{{restanteAPagar()}}</strong></td>
+                                            <td ng-show="restanteAPagar() < 0" style="text-align: right; color: blue"><strong>{{(restanteAPagar() * -1).toFixed(2)}}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="col-sm-offset-1 col-sm-10" style="text-align: right">
-                                <h4><strong>{{calculaTotalParcelas()}}</strong></h4>
                             </div>
                         </div>
                     </uib-tab>
@@ -211,7 +224,12 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Data</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control date" placeholder="Data" ng-model="parcelaForm.dataPagamento">
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="parcelaForm.dataPagamento" is-open="popupDatePicker.opened" close-text="Close" show-button-bar="false" ng-readonly="true" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDatePicker('today')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
                     </div>
                 </div>
                 <div class="form-group">
