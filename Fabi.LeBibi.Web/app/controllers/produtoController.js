@@ -36,6 +36,7 @@
             $scope.produto = data;
             $scope.produto.valorCompra = $scope.produto.valorCompra.toFixed(2);
             $scope.produto.valorVenda = $scope.produto.valorVenda.toFixed(2);
+            $scope.produto.margemLucro = $scope.produto.margemLucro.toFixed(2);
         }).error(function (jqxhr, textStatus) {
             toasterAlert.showAlert(jqxhr.message);
         });
@@ -57,6 +58,7 @@
             $scope.produto = data;
             $scope.produto.valorCompra = $scope.produto.valorCompra.toFixed(2);
             $scope.produto.valorVenda = $scope.produto.valorVenda.toFixed(2);
+            $scope.produto.margemLucro = $scope.produto.margemLucro.toFixed(2);
             toasterAlert.showAlert(mensagemSalvo);
         }).error(function (jqxhr, textStatus) {
             toasterAlert.showAlert(jqxhr.message);
@@ -112,15 +114,28 @@
                 }
                 else {
                     valor = findAndReplace(valor, ',', '');
-                    $scope.produto.valorVenda = (((valor / 100) * $scope.produto.margemLucro) + valor * 1).toFixed(2);
+                    var margemLucro = findAndReplace($scope.produto.margemLucro, ',', '');
+                    $scope.produto.valorVenda = (((valor / 100) * margemLucro) + valor * 1).toFixed(2);
                     $scope.produto.valorVenda = $('.valorVenda').masked($scope.produto.valorVenda);
                 }
             }
             if ($(currentField).attr('class').indexOf('margemLucro') > -1) {
                 if ($scope.produto.valorCompra && $scope.produto.valorCompra != '') {
                     var valorCompra = findAndReplace($scope.produto.valorCompra, ',', '');
+                    $scope.produto.valorVenda = null;
                     $scope.produto.valorVenda = (((valorCompra / 100) * valor) + valorCompra * 1).toFixed(2);
                     $scope.produto.valorVenda = $('.valorVenda').masked($scope.produto.valorVenda);
+                }
+            }
+            if ($(currentField).attr('class').indexOf('valorVenda') > -1) {
+                if ($scope.produto.valorCompra && $scope.produto.valorCompra != '') {
+                    valor = findAndReplace(valor, ',', '');
+                    var valorCompra = findAndReplace($scope.produto.valorCompra, ',', '');
+                    var margemLucro = parseFloat(((valor - valorCompra) / valorCompra) * 100).toFixed(2)
+                    if (margemLucro <= 0) {
+                        margemLucro = null;
+                    }
+                    $scope.produto.margemLucro = margemLucro;
                 }
             }
         },
@@ -129,7 +144,6 @@
 
     $('.money').mask('#,##0.00', options);
     $('.integer').mask('###0', { reverse: true });
-    $('.percent').mask('###0', options);
 
     //PAGINATION
     $scope.total = 0;

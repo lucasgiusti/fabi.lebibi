@@ -167,6 +167,31 @@
         }
 
     };
+
+    var options = {
+        onChange: function (valor, event, currentField, options) {
+            if ($(currentField).attr('class').indexOf('descontoPorcentagem') > -1) {
+                if ($scope.totalAPagar() && $scope.totalAPagar() != '') {
+                    $scope.venda.descontoValor = parseFloat(($scope.totalAPagar() / 100) * valor).toFixed(2);
+                }
+            }
+            if ($(currentField).attr('class').indexOf('descontoValor') > -1) {
+                alert(1);
+                if ($scope.totalAPagar() && $scope.totalAPagar() != '') {
+                    valor = findAndReplace(valor, ',', '');
+                    var totalAPagar = findAndReplace($scope.totalAPagar(), ',', '');
+                    var descontoPorcentagem = parseFloat(((valor - totalAPagar) / totalAPagar) * 100).toFixed(2)
+                    if (descontoPorcentagem <= 0) {
+                        descontoPorcentagem = null;
+                    }
+                    $scope.venda.descontoPorcentagem = descontoPorcentagem;
+                }
+            }
+        },
+        reverse: true
+    };
+
+    $('.money').mask('#0.00', options);
 });
 
 app.controller('modalProdutosDisponiveisInstanceController', function ($scope, $uibModalInstance, dadosModalProdutosDisponiveis) {
